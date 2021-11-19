@@ -1,0 +1,14 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "editor.lineNumbers": "on",
+  "editor.rulers": [80],
+  "eslint.packageManager": "npm",
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  }
+}
