@@ -1,3 +1,4 @@
+###### /auth ######
 ### Create a User
 POST http://localhost:3000/auth/signup
 Content-Type: application/json
@@ -25,3 +26,17 @@ POST http://localhost:3000/auth/signout
 
 ### Refresh a Token
 GET http://localhost:3000/auth/refresh
+
+###### /tasks ######
+### Get all tasks
+GET http://localhost:3000/tasks
+
+### Create a Task
+POST http://localhost:3000/tasks
+Content-Type: application/json
+
+{
+    "title": "サンプルTODO",
+    "content": "サンプルとして追加したTODOリストの1つ",
+    "expires": "sa"
+}
