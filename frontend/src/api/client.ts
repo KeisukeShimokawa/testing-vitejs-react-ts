@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Router } from 'next/dist/client/router';
 
 const apiClient = axios.create({
   baseURL: 'http://localhost:8080/',
@@ -26,17 +27,25 @@ apiClient.interceptors.response.use(
   async (error) => {
     const originalConfig = error.config;
 
-    if ((originalConfig.url = '/auth/signin' && error.response)) {
-      if (error.response.status === 401 && !originalConfig._retry) {
-        originalConfig._retry = true;
+    if (
+      error.response.status === 401 &&
+      originalConfig.url === '/auth/refresh'
+    ) {
+      window.location.pathname = '/signin';
+      return Promise.reject(error);
+    }
 
-        try {
-          const _response = await apiClient.post('/auth/refresh');
-          console.log('refresh success ...');
+    if (error.response.status === 401 && !originalConfig._retry) {
+      originalConfig._retry = true;
+
+      try {
+        const _response = await apiClient.get('/auth/refresh');
+        if (_response.status === 200) {
           return apiClient(originalConfig);
-        } catch (_error) {
-          return Promise.reject(_error);
         }
+      } catch (_err) {
+        alert('here');
+        return Promise.reject(_err);
       }
     }
 
