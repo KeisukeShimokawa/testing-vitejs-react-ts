@@ -1,20 +1,25 @@
 import { NextPage } from 'next';
+import { useRouter } from 'next/dist/client/router';
 import React, { useState } from 'react';
 import { apiClient } from '../../api/client';
 
 const Signup: NextPage = () => {
+  const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    apiClient.post('/auth/signup', {
+    await apiClient.post('/auth/signup', {
       name,
       email,
       password,
     });
+
+    alert('ユーザー登録完了');
+    router.push('/');
   };
 
   return (
