@@ -50,3 +50,5 @@ export const setup = (app: INestApplication): INestApplication => {
 ```
 
 これで `http://localhost:3000/api` にアクセスすれば API の確認ができる。
+
+## ユーザー登録
