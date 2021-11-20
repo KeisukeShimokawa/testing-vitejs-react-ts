@@ -6,7 +6,7 @@ import {
 import { nanoid } from 'nanoid';
 import { PrismaErrorCode } from '../../prisma/prisma-error-code';
 import { PrismaService } from '../../prisma/prisma.service';
-import { RegisterUserDTO } from '../controllers/request/register-user.dto';
+import { RegisterUserDTO } from '../controllers/request/signup-user.dto';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()

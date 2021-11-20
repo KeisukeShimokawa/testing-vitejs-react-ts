@@ -16,9 +16,9 @@ import { LocalAuthGuard } from '../guards/local.guard';
 import { AccessTokenInterceptor } from '../interceptors/access-token.interceptor';
 import { RefreshTokenInterceptor } from '../interceptors/refresh-token.interceptor';
 import { AuthUser } from '../interfaces/auth-user.interface';
-import { RegisterUserService } from '../services/register-user.service';
+import { RegisterUserService } from '../services/signup-user.service';
 import { RemoveRefreshToken } from '../services/remove-refresh-token.service';
-import { RegisterUserDTO } from './request/register-user.dto';
+import { RegisterUserDTO } from './request/signup-user.dto';
 
 @Controller('auth')
 export class AuthController {
