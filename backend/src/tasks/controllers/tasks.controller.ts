@@ -12,6 +12,7 @@ import { CurrentUser } from '../../auth/decorators/current-user.decorator';
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { AuthUser } from '../../auth/interfaces/auth-user.interface';
 import { CreateTaskService } from '../services/create-task.service';
+import { DeleteTaskService } from '../services/delete-task.service';
 import { GetAllTasksService } from '../services/get-all-tasks.service';
 import { GetTaskByIdService } from '../services/get-task-by-id.service';
 import { CreateTaskDTO } from './request/create-task.dto';
@@ -22,6 +23,7 @@ export class TaskController {
     private readonly getAllTasksService: GetAllTasksService,
     private readonly createTaskService: CreateTaskService,
     private readonly getTaskByIdService: GetTaskByIdService,
+    private readonly deleteTaskService: DeleteTaskService,
   ) {}
 
   @Get()
@@ -49,7 +51,7 @@ export class TaskController {
 
   @Delete('/:taskId')
   @UseGuards(JwtAuthGuard)
-  deleteTask() {
-    return 'delete';
+  deleteTask(@Param('taskId') taskId: string, @CurrentUser() user: AuthUser) {
+    return this.deleteTaskService.execute(taskId, user.id);
   }
 }

@@ -43,3 +43,6 @@ Content-Type: application/json
 
 ### Get a Task by Id
 GET http://localhost:3000/tasks/2YJzdhI2MYqRa0_C7AcJW
+
+### Delete a Task
+DELETE http://localhost:3000/tasks/2YJzdhI2MYqRa0_C7AcJW
