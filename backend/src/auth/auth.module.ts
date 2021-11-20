@@ -11,6 +11,8 @@ import { SignRefreshTokenService } from './services/sign-refresh-token.service';
 import { VerifyJwtPayloadService } from './services/verify-payload.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
+import { VerifyRefreshPayloadService } from './services/verify-refresh-payload.service';
+import { JwtRefreshStrategy } from './strategies/jwt-refresh.strategy';
 
 @Module({
   controllers: [AuthController],
@@ -21,8 +23,10 @@ import { LocalStrategy } from './strategies/local.strategy';
     SignRefreshTokenService,
     RemoveRefreshToken,
     VerifyJwtPayloadService,
+    VerifyRefreshPayloadService,
     LocalStrategy,
     JwtStrategy,
+    JwtRefreshStrategy,
   ],
   imports: [PrismaModule, ConfigModule, JwtModule.register({})],
 })

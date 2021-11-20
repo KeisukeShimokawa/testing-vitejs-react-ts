@@ -19,6 +19,7 @@ import { AuthUser } from '../interfaces/auth-user.interface';
 import { RegisterUserService } from '../services/signup-user.service';
 import { RemoveRefreshToken } from '../services/remove-refresh-token.service';
 import { RegisterUserDTO } from './request/signup-user.dto';
+import { JwtRefreshGuard } from '../guards/jwt-refresh.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -57,8 +58,10 @@ export class AuthController {
   }
 
   @Get('refresh')
-  refresh() {
-    return 'refresh';
+  @UseGuards(JwtRefreshGuard)
+  @UseInterceptors(AccessTokenInterceptor)
+  refresh(@CurrentUser() user: AuthUser) {
+    return user;
   }
 
   @Get('me')
