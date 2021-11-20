@@ -18,7 +18,7 @@ npm install --save-dev prisma dotenv-cli
 - `POST /auth/signup`
 - `POST /auth/signin`
 - `POST /auth/signout`
-- `POST /auth/refresh`
+- `GET /auth/refresh`
 - `GET /auth/me`
 - `GET /tasks`
 - `POST /tasks`
@@ -48,3 +48,5 @@ export const setup = (app: INestApplication): INestApplication => {
   return app;
 };
 ```
+
+これで `http://localhost:3000/api` にアクセスすれば API の確認ができる。
