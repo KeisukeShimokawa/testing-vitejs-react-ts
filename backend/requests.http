@@ -38,5 +38,5 @@ Content-Type: application/json
 {
     "title": "サンプルTODO",
     "content": "サンプルとして追加したTODOリストの1つ",
-    "expires": "sa"
+    "expires": "2021-11-22T12:00:00+09:00"
 }
