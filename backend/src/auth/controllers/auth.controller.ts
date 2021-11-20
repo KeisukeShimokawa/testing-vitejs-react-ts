@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseInterceptors } from '@nestjs/common';
+import { AccessTokenInterceptor } from '../interceptors/access-token.interceptor';
 import { RegisterUserService } from '../services/register-user.service';
 import { RegisterUserDTO } from './request/register-user.dto';
 
@@ -7,6 +8,7 @@ export class AuthController {
   constructor(private readonly registerUser: RegisterUserService) {}
 
   @Post('signup')
+  @UseInterceptors(AccessTokenInterceptor)
   async signup(@Body() body: RegisterUserDTO) {
     return await this.registerUser.execute(body);
   }
