@@ -1,6 +1,18 @@
-import { Body, Controller, Get, Post, UseInterceptors } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Post,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
+import { CurrentUser } from '../decorators/current-user.decorator';
+import { LocalAuthGuard } from '../guards/loca.guard';
 import { AccessTokenInterceptor } from '../interceptors/access-token.interceptor';
 import { RefreshTokenInterceptor } from '../interceptors/refresh-token.interceptor';
+import { AuthUser } from '../interfaces/auth-user.interface';
 import { RegisterUserService } from '../services/register-user.service';
 import { RegisterUserDTO } from './request/register-user.dto';
 
@@ -11,13 +23,19 @@ export class AuthController {
   @Post('signup')
   @UseInterceptors(AccessTokenInterceptor)
   @UseInterceptors(RefreshTokenInterceptor)
-  async signup(@Body() body: RegisterUserDTO) {
-    return await this.registerUser.execute(body);
+  async signup(@Body() body: RegisterUserDTO): Promise<AuthUser> {
+    const user = await this.registerUser.execute(body);
+    return user;
   }
 
   @Post('signin')
-  signin() {
-    return 'signin';
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(LocalAuthGuard)
+  @UseInterceptors(AccessTokenInterceptor)
+  @UseInterceptors(RefreshTokenInterceptor)
+  signin(@CurrentUser() user: AuthUser): AuthUser {
+    console.log(`[POST /auth/signin] called with ${user} ...`);
+    return user;
   }
 
   @Post('signout')
