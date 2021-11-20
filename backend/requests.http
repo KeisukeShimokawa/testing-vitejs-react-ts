@@ -19,3 +19,6 @@ Content-Type: application/json
 
 ### Check a Token
 GET http://localhost:3000/auth/me
+
+### Logout a User
+POST http://localhost:3000/auth/signout

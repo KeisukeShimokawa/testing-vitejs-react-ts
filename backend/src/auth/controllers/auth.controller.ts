@@ -5,9 +5,11 @@ import {
   HttpCode,
   HttpStatus,
   Post,
+  Res,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { CurrentUser } from '../decorators/current-user.decorator';
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 import { LocalAuthGuard } from '../guards/local.guard';
@@ -15,11 +17,15 @@ import { AccessTokenInterceptor } from '../interceptors/access-token.interceptor
 import { RefreshTokenInterceptor } from '../interceptors/refresh-token.interceptor';
 import { AuthUser } from '../interfaces/auth-user.interface';
 import { RegisterUserService } from '../services/register-user.service';
+import { RemoveRefreshToken } from '../services/remove-refresh-token.service';
 import { RegisterUserDTO } from './request/register-user.dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly registerUser: RegisterUserService) {}
+  constructor(
+    private readonly registerUser: RegisterUserService,
+    private readonly removeRefreshToken: RemoveRefreshToken,
+  ) {}
 
   @Post('signup')
   @UseInterceptors(AccessTokenInterceptor)
@@ -39,8 +45,15 @@ export class AuthController {
   }
 
   @Post('signout')
-  signout() {
-    return 'signout';
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(JwtAuthGuard)
+  async signout(@CurrentUser() user: AuthUser, @Res() res: Response) {
+    await this.removeRefreshToken.execute(user);
+
+    res.clearCookie('access_token');
+    res.clearCookie('refresh_token');
+
+    return res.send();
   }
 
   @Get('refresh')

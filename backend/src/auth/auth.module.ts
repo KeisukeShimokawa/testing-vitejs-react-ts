@@ -5,6 +5,7 @@ import { PrismaModule } from '../prisma/prisma.module';
 import { AuthController } from './controllers/auth.controller';
 import { LoginUserService } from './services/login.service';
 import { RegisterUserService } from './services/register-user.service';
+import { RemoveRefreshToken } from './services/remove-refresh-token.service';
 import { SignAccessTokenService } from './services/sign-access-token.service';
 import { SignRefreshTokenService } from './services/sign-refresh-token.service';
 import { VerifyJwtPayloadService } from './services/verify-payload.service';
@@ -18,6 +19,7 @@ import { LocalStrategy } from './strategies/local.strategy';
     LoginUserService,
     SignAccessTokenService,
     SignRefreshTokenService,
+    RemoveRefreshToken,
     VerifyJwtPayloadService,
     LocalStrategy,
     JwtStrategy,
