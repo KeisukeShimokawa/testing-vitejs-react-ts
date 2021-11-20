@@ -6,6 +6,7 @@ import { DeleteTaskService } from './services/delete-task.service';
 import { DoneTaskService } from './services/done-task.service';
 import { GetAllTasksService } from './services/get-all-tasks.service';
 import { GetTaskByIdService } from './services/get-task-by-id.service';
+import { PendingTaskService } from './services/pending-task.service';
 
 @Module({
   controllers: [TaskController],
@@ -15,6 +16,7 @@ import { GetTaskByIdService } from './services/get-task-by-id.service';
     GetTaskByIdService,
     DeleteTaskService,
     DoneTaskService,
+    PendingTaskService,
   ],
   imports: [PrismaModule],
 })

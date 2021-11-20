@@ -16,6 +16,7 @@ import { DeleteTaskService } from '../services/delete-task.service';
 import { DoneTaskService } from '../services/done-task.service';
 import { GetAllTasksService } from '../services/get-all-tasks.service';
 import { GetTaskByIdService } from '../services/get-task-by-id.service';
+import { PendingTaskService } from '../services/pending-task.service';
 import { CreateTaskDTO } from './request/create-task.dto';
 
 @Controller('tasks')
@@ -26,6 +27,7 @@ export class TaskController {
     private readonly getTaskByIdService: GetTaskByIdService,
     private readonly deleteTaskService: DeleteTaskService,
     private readonly doneTaskService: DoneTaskService,
+    private readonly pendingTaskService: PendingTaskService,
   ) {}
 
   @Get()
@@ -56,8 +58,11 @@ export class TaskController {
 
   @Patch('/:taskId/pending')
   @UseGuards(JwtAuthGuard)
-  markTaskAsDone() {
-    return 'edit';
+  markTaskAsDone(
+    @Param('taskId') taskId: string,
+    @CurrentUser() user: AuthUser,
+  ) {
+    return this.pendingTaskService.execute(taskId, user.id);
   }
 
   @Delete('/:taskId')
