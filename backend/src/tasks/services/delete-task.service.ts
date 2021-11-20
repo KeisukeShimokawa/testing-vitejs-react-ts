@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
@@ -10,8 +14,12 @@ export class DeleteTaskService {
       where: { id: taskId },
     });
 
+    if (!fetchedTask) {
+      throw new NotFoundException(`タスク { ${taskId} } が見つかりません。`);
+    }
+
     if (fetchedTask.userId !== userId) {
-      throw new BadRequestException('所有者しか削除できません。');
+      throw new ForbiddenException('所有者しか削除できません。');
     }
 
     const task = await this.prisma.task.delete({ where: { id: taskId } });
