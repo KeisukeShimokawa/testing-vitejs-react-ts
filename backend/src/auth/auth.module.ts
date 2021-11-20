@@ -5,12 +5,14 @@ import { PrismaModule } from '../prisma/prisma.module';
 import { AuthController } from './controllers/auth.controller';
 import { RegisterUserService } from './services/register-user.service';
 import { SignAccessTokenService } from './services/sign-access-token.service';
+import { SignRefreshTokenService } from './services/sign-refresh-token.service';
 
 @Module({
   controllers: [AuthController],
   providers: [
     RegisterUserService,
     SignAccessTokenService,
+    SignRefreshTokenService,
   ],
   imports: [PrismaModule, ConfigModule, JwtModule.register({})],
 })
