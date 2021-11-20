@@ -17,6 +17,11 @@ export const setup = (app: INestApplication): INestApplication => {
   const prismaService = app.get<PrismaService>(PrismaService);
   prismaService.enableShutdownHooks(app);
 
+  app.enableCors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  });
+
   const config = new DocumentBuilder()
     .setTitle('認証システム')
     .setDescription('タスク管理を例題に認証システムを構築する')
