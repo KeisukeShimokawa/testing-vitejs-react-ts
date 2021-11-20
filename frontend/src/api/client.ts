@@ -32,6 +32,7 @@ apiClient.interceptors.response.use(
 
         try {
           const _response = await apiClient.post('/auth/refresh');
+          console.log('refresh success ...');
           return apiClient(originalConfig);
         } catch (_error) {
           return Promise.reject(_error);

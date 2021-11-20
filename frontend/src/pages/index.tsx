@@ -7,7 +7,12 @@ const Home: NextPage = () => {
       <ul>
         <li>
           <Link href="/signup" passHref>
-            <button>Signup</button>
+            <button>Sign Up</button>
+          </Link>
+        </li>
+        <li>
+          <Link href="/signin" passHref>
+            <button>Sign In</button>
           </Link>
         </li>
       </ul>
