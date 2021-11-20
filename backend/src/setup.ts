@@ -12,7 +12,7 @@ export const setup = (app: INestApplication): INestApplication => {
   );
 
   app.use(cookieParser());
-  app.use(csurf());
+  // app.use(csurf());
 
   const prismaService = app.get<PrismaService>(PrismaService);
   prismaService.enableShutdownHooks(app);
