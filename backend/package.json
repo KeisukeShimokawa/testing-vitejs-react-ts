@@ -17,6 +17,7 @@
     "migrate:dev:reset": "dotenv -e .env.dev -- prisma migrate reset --force",
     "migrate:test": "dotenv -e .env.test -- prisma migrate dev",
     "migrate:test:reset": "dotenv -e .env.test -- prisma migrate reset --force",
+    "model-generate": "dotenv -e .env.dev -- prisma generate",
     "reset:dev": "rm -rf prisma/dev.sqlite && npm run migrate:dev:reset",
     "reset:test": "rm -rf prisma/test.sqlite && npm run migrate:test:reset"
   },
