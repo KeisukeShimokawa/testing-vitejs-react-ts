@@ -32,7 +32,7 @@ export class RefreshTokenInterceptor implements NestInterceptor {
           sameSite: 'strict',
           secure: this.configService.get('NODE_ENV') === 'production',
           maxAge:
-            this.configService.get('JWT_ACCESS_TOKEN_EXPIRATION_TIME') * 1000,
+            this.configService.get('JWT_REFRESH_TOKEN_EXPIRATION_TIME') * 1000,
         });
 
         return user;
