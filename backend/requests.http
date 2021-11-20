@@ -16,3 +16,6 @@ Content-Type: application/json
     "email": "shimopino@example.com",
     "password": "shimopino"
 }
+
+### Check a Token
+GET http://localhost:3000/auth/me

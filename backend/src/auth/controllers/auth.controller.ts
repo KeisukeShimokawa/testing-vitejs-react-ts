@@ -9,7 +9,8 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { CurrentUser } from '../decorators/current-user.decorator';
-import { LocalAuthGuard } from '../guards/loca.guard';
+import { JwtAuthGuard } from '../guards/jwt-auth.guard';
+import { LocalAuthGuard } from '../guards/local.guard';
 import { AccessTokenInterceptor } from '../interceptors/access-token.interceptor';
 import { RefreshTokenInterceptor } from '../interceptors/refresh-token.interceptor';
 import { AuthUser } from '../interfaces/auth-user.interface';
@@ -34,7 +35,6 @@ export class AuthController {
   @UseInterceptors(AccessTokenInterceptor)
   @UseInterceptors(RefreshTokenInterceptor)
   signin(@CurrentUser() user: AuthUser): AuthUser {
-    console.log(`[POST /auth/signin] called with ${user} ...`);
     return user;
   }
 
@@ -49,7 +49,8 @@ export class AuthController {
   }
 
   @Get('me')
-  me() {
-    return 'me';
+  @UseGuards(JwtAuthGuard)
+  me(@CurrentUser() user: AuthUser) {
+    return user;
   }
 }

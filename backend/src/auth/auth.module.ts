@@ -7,6 +7,8 @@ import { LoginUserService } from './services/login.service';
 import { RegisterUserService } from './services/register-user.service';
 import { SignAccessTokenService } from './services/sign-access-token.service';
 import { SignRefreshTokenService } from './services/sign-refresh-token.service';
+import { VerifyJwtPayloadService } from './services/verify-payload.service';
+import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
 
 @Module({
@@ -16,7 +18,9 @@ import { LocalStrategy } from './strategies/local.strategy';
     LoginUserService,
     SignAccessTokenService,
     SignRefreshTokenService,
+    VerifyJwtPayloadService,
     LocalStrategy,
+    JwtStrategy,
   ],
   imports: [PrismaModule, ConfigModule, JwtModule.register({})],
 })
