@@ -16,10 +16,13 @@
     "migrate:dev": "dotenv -e .env.dev -- prisma migrate dev",
     "migrate:dev:reset": "dotenv -e .env.dev -- prisma migrate reset --force",
     "migrate:test": "dotenv -e .env.test -- prisma migrate dev",
-    "migrate:test:reset": "dotenv -e .env.test -- prisma migrate reset --force"
+    "migrate:test:reset": "dotenv -e .env.test -- prisma migrate reset --force",
+    "reset:dev": "rm -rf prisma/dev.sqlite && npm run migrate:dev:reset",
+    "reset:test": "rm -rf prisma/test.sqlite && npm run migrate:test:reset"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
+    "@nestjs/config": "^1.1.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/jwt": "^8.0.0",
     "@nestjs/passport": "^8.0.1",
@@ -31,6 +34,7 @@
     "class-validator": "^0.13.1",
     "cookie-parser": "^1.4.6",
     "csurf": "^1.11.0",
+    "joi": "^17.4.2",
     "nanoid": "^3.1.30",
     "passport": "^0.5.0",
     "passport-jwt": "^4.0.0",
@@ -48,6 +52,7 @@
     "@types/cookie-parser": "^1.4.2",
     "@types/express": "^4.17.13",
     "@types/jest": "27.0.2",
+    "@types/joi": "^17.2.3",
     "@types/node": "^16.0.0",
     "@types/passport-jwt": "^3.0.6",
     "@types/passport-local": "^1.0.34",
