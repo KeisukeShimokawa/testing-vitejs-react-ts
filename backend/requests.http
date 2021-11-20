@@ -46,3 +46,6 @@ GET http://localhost:3000/tasks/2YJzdhI2MYqRa0_C7AcJW
 
 ### Delete a Task
 DELETE http://localhost:3000/tasks/2YJzdhI2MYqRa0_C7AcJW
+
+### Done a Task
+PATCH http://localhost:3000/tasks/2YJzdhI2MYqRa0_C7AcJW/done
