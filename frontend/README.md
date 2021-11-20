@@ -13,3 +13,7 @@ npm install --save-dev jest @types/jest ts-jest
 npm install --save-dev @testing-library/react @testing-library/user-event @testing-library/dom
 npm install --save-dev eslint-plugin-jest-dom eslint-plugin-testing-library
 ```
+
+```bash
+npm install axios
+```
