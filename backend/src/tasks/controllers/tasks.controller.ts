@@ -13,6 +13,7 @@ import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { AuthUser } from '../../auth/interfaces/auth-user.interface';
 import { CreateTaskService } from '../services/create-task.service';
 import { GetAllTasksService } from '../services/get-all-tasks.service';
+import { GetTaskByIdService } from '../services/get-task-by-id.service';
 import { CreateTaskDTO } from './request/create-task.dto';
 
 @Controller('tasks')
@@ -20,6 +21,7 @@ export class TaskController {
   constructor(
     private readonly getAllTasksService: GetAllTasksService,
     private readonly createTaskService: CreateTaskService,
+    private readonly getTaskByIdService: GetTaskByIdService,
   ) {}
 
   @Get()
@@ -34,8 +36,9 @@ export class TaskController {
   }
 
   @Get('/:taskId')
-  getTask() {
-    return 'task';
+  getTask(@Param('taskId') taskId: string) {
+    console.log(taskId);
+    return this.getTaskByIdService.execute(taskId);
   }
 
   @Patch('/:taskId')

@@ -40,3 +40,6 @@ Content-Type: application/json
     "content": "サンプルとして追加したTODOリストの1つ",
     "expires": "2021-11-22T12:00:00+09:00"
 }
+
+### Get a Task by Id
+GET http://localhost:3000/tasks/2YJzdhI2MYqRa0_C7AcJW
