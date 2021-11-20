@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String      @id
+  name       String
+  email      String
+  password   String
+  credential Credential?
+  Task       Task[]
+
+  @@map("users")
+}
+
+model Credential {
+  user         User   @relation(fields: [userId], references: [id])
+  userId       String @unique
+  refreshToken String
+
+  @@map("credentials")
+}
+
+model Task {
+  id      String   @id
+  title   String
+  content String
+  expires DateTime
+  user    User     @relation(fields: [userId], references: [id])
+  userId  String
+
+  @@map("tasks")
+}
