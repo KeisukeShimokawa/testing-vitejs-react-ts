@@ -10,18 +10,22 @@ export class DoneTaskService {
   constructor(private readonly prisma: PrismaService) {}
 
   public async execute(taskId: string, userId: string) {
+    const fetchedTask = await this.prisma.task.findUnique({
+      where: { id: taskId },
+    });
+
+    if (!fetchedTask) {
+      throw new NotFoundException(`タスク { ${taskId} } が見つかりません。`);
+    }
+
+    if (fetchedTask.userId !== userId) {
+      throw new ForbiddenException('所有者しかタスクを完了できません。');
+    }
+
     const task = await this.prisma.task.update({
       where: { id: taskId },
       data: { done: true },
     });
-
-    if (!task) {
-      throw new NotFoundException(`タスク { ${taskId} } が見つかりません。`);
-    }
-
-    if (task.userId !== userId) {
-      throw new ForbiddenException('所有者しかタスクを完了できません。');
-    }
 
     return task;
   }
