@@ -1,8 +1,19 @@
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { PrismaService } from './prisma/prisma.service';
+import * as cookieParser from 'cookie-parser';
+import * as csurf from 'csurf';
 
 export const setup = (app: INestApplication): INestApplication => {
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+    }),
+  );
+
+  app.use(cookieParser());
+  app.use(csurf());
+
   const prismaService = app.get<PrismaService>(PrismaService);
   prismaService.enableShutdownHooks(app);
 

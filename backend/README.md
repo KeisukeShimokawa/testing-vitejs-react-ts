@@ -57,3 +57,13 @@ export const setup = (app: INestApplication): INestApplication => {
 npm install --save class-validator class-transformer bcrypt
 npm install --save-dev @types/bcrypt
 ```
+
+```bash
+npm install --save csurf
+npm install --save cookie-parser
+npm install --save passport passport-local @nestjs/passport
+npm install --save passport-jwt @nestjs/jwt
+npm install --save-dev @types/cookie-parser
+npm install --save-dev @types/passport-local
+npm install --save-dev @types/passport-jwt
+```
