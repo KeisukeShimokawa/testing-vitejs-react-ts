@@ -4,6 +4,7 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
+    'plugin:testing-library/react',
     'prettier',
   ],
 };
